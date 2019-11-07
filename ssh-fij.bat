@@ -1,0 +1,1 @@
+ssh -c aes256-cbc fij@funtech.tw -p 2222
