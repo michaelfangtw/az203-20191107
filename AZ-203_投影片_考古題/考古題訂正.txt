@@ -1,0 +1,125 @@
+20191027
+考古題訂正:
+
+13. FBA
+
+15. A (Documents.Index method)
+https://docs.microsoft.com/en-us/azure/search/search-get-started-dotnet
+
+19. 
+region
+email
+CloudTable
+TableOperation query = TableOperation.Retrive<PlayerEntity>(pk,rk)
+TableResult data = await table.ExecuteAsync(query)
+
+21. D
+
+22.
+az group create
+az aks create
+az aks get-credentials
+kubectl apply
+
+1.  
+Orders o
+li
+o.line_items
+o.address.city
+
+3. BC
+
+23. 答案是對的，參考資料如下：
+https://docs.microsoft.com/zh-tw/azure/batch/batch-task-output-files
+https://docs.microsoft.com/en-us/dotnet/api/microsoft.azure.batch.cloudtask.outputfiles?view=azure-dotnet
+圖上藍色標的是錯的，下面的 Answer 才是對的
+
+25. 
+ApplicationInsightsLoggerOptions
+IncludeEventId
+ApplicationServices
+
+參考：
+https://github.com/microsoft/ApplicationInsights-aspnetcore/wiki/Logging
+
+26. 備選四個選項的順序是: 3,2,1,4
+第一步: 選第 3 個
+第二步: 選第 2 個
+第三步: 選第 1 個
+第四步: 選第 4 個
+
+31. AF
+
+34.
+az appservice plan create
+az webapp create
+--plan $webappname
+az webapp deployment
+--repo-url $gitrepo --branch master --manual-integration
+
+36. 
+Continuous
+Triggered
+Continuous
+參考：
+https://docs.microsoft.com/zh-tw/azure/app-service/webjobs-create
+
+38. AB
+
+39. B
+這是是前面 senario 題的子題
+
+40.
+HTTP Request Header 
+Base64
+
+42.
+NotificationHubClient
+NotificationHubClient
+CreateClientFromConnectionString
+SendWindowsNativeNotificationAsync
+
+46. No, No, Yes
+因為 SaveScore 裡面沒有 insertOperation
+
+47. No, Yes, Yes
+因為 Resolver 只抓 RowKey (playerid) 跟 score
+
+48. 沒有原本的程式碼，所以不知道要補那一行，請參考： https://docs.microsoft.com/zh-tw/azure/service-bus-messaging/service-bus-dotnet-how-to-use-topics-subscriptions
+完整的步驟是 C, A, B, D
+
+50. (不確定)
+Azure Resource
+Client cert
+
+51.
+QueryType
+Facets
+Filter
+
+52. 4 -> 1 -> 6
+
+54.
+Inbound
+Outbound
+Inbound
+
+55.
+IDatabase cache = Connection.GetDatabase();
+cache.KeyDelete("teams");
+
+59. C
+
+66. 4 -> 3 -> 3
+
+67. 1 -> 4
+
+70. 
+SingleTransferContext
+ShouldOverwriteCallbackAsync
+
+71.
+3
+2
+
+41. 3 -> 2 -> 4 -> 1 or 3 -> 2 -> 1 -> 4
