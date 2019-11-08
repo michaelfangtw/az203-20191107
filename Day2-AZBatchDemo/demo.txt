@@ -1,0 +1,61 @@
+group="myResourceGroup"
+#不可有特殊字元
+storage="mystorageaccountfij0727"
+batch="mybatchaccountfij0727"
+
+az group create --name $group --location eastus
+
+az storage account create --name $storage \
+    --resource-group $group --location eastus \
+    --sku Standard_LRS
+
+az batch account create \
+    --name $batch \
+    --storage-account $storage \
+    --resource-group $group \
+    --location eastus
+
+az batch account login \
+    --name $batch \
+    --resource-group $group \
+    --shared-key-auth
+
+az batch pool create \
+    --id mypool --vm-size Standard_A1_v2 \
+    --target-dedicated-nodes 5 \
+    --image canonical:ubuntuserver:16.04-LTS \
+    --node-agent-sku-id "batch.node.ubuntu 16.04" 
+
+az batch pool show --pool-id mypool \
+    --query "allocationState"
+
+az batch job create \
+    --id myjob \
+    --pool-id mypool
+
+
+for i in {1..5}
+do
+   az batch task create \
+    --task-id mytask$i \
+    --job-id myjob \
+    --command-line "/bin/bash -c 'printenv | grep AZ_BATCH; sleep 90s'"
+done
+
+az batch task show \
+    --job-id myjob \
+    --task-id mytask1
+
+
+az batch task file list \
+    --job-id myjob \
+    --task-id mytask1 \
+    --output table
+
+az batch task file download \
+    --job-id myjob \
+    --task-id mytask1 \
+    --file-path stdout.txt \
+    --destination ./stdout.txt
+
+cat ./stdout.txt
