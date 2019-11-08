@@ -1,0 +1,20 @@
+cd
+md demo
+func init
+func templates list
+func new -t "HTTP trigger" -n DemoFunction
+code .
+
+PowerShell
+Set-ExecutionPolicy UnRestricted
+func start
+
+
+Post
+Header : Content-Type :Application/json
+Body(raw): {"name":"mike"}
+
+
+deploy
+
+func azure functionapp publish imgfuncfij0727

@@ -3,3 +3,27 @@ https://dotnet.microsoft.com/download/dotnet-core/2.2
 .net core 2.2 installer
 asp.net core 2.2 installer
 .net core sdk 2.2 installer
+
+
+install azure CLI
+
+
+
+1.show subscription
+az account list
+
+2.set default subscription
+az account set -s 90be266f-f5e4-434d-b49e-1952a082a7d9
+
+3.產生打包檔zip內容
+dotnet publish -c Release -o publish
+
+
+
+
+
+https://docs.microsoft.com/zh-tw/azure/azure-functions/functions-run-local
+
+power shell
+Set-ExecutionPolicy Unrestricted
+

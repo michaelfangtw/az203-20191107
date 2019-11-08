@@ -2,68 +2,68 @@
     "version": "2.0.0",
     "tasks": [
         {
-            "label": "build",
-            "command": "dotnet",
-            "type": "process",
-            "args": [
-                "build",
-                "${workspaceFolder}/Api.csproj",
-                "/property:GenerateFullPaths=true",
-                "/consoleloggerparameters:NoSummary"
-            ],
-            "problemMatcher": "$msCompile"
-        },
-        {
-            "label": "publish",
-            "command": "dotnet",
-            "type": "process",
-            "args": [
-                "publish",
-                "${workspaceFolder}/Api.csproj",
-                "/property:GenerateFullPaths=true",
-                "/consoleloggerparameters:NoSummary"
-            ],
-            "problemMatcher": "$msCompile"
-        },
-        {
-            "label": "watch",
-            "command": "dotnet",
-            "type": "process",
-            "args": [
-                "watch",
-                "run",
-                "${workspaceFolder}/Api.csproj",
-                "/property:GenerateFullPaths=true",
-                "/consoleloggerparameters:NoSummary"
-            ],
-            "problemMatcher": "$msCompile"
-        },
-        {
             "label": "clean",
             "command": "dotnet",
-            "type": "process",
             "args": [
                 "clean",
-                "${workspaceFolder}",
                 "/property:GenerateFullPaths=true",
                 "/consoleloggerparameters:NoSummary"
             ],
+            "type": "process",
             "problemMatcher": "$msCompile"
         },
         {
-            "label": "publish-release",
+            "label": "build",
             "command": "dotnet",
-            "type": "process",
             "args": [
-                "publish",
-                "${workspaceFolder}",
+                "build",
+                "/property:GenerateFullPaths=true",
+                "/consoleloggerparameters:NoSummary"
+            ],
+            "type": "process",
+            "dependsOn": "clean",
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            },
+            "problemMatcher": "$msCompile"
+        },
+        {
+            "label": "clean release",
+            "command": "dotnet",
+            "args": [
+                "clean",
                 "--configuration",
                 "Release",
                 "/property:GenerateFullPaths=true",
                 "/consoleloggerparameters:NoSummary"
             ],
-            "problemMatcher": "$msCompile",
-            "dependsOn": "clean"
+            "type": "process",
+            "problemMatcher": "$msCompile"
+        },
+        {
+            "label": "publish",
+            "command": "dotnet",
+            "args": [
+                "publish",
+                "--configuration",
+                "Release",
+                "/property:GenerateFullPaths=true",
+                "/consoleloggerparameters:NoSummary"
+            ],
+            "type": "process",
+            "dependsOn": "clean release",
+            "problemMatcher": "$msCompile"
+        },
+        {
+            "type": "func",
+            "dependsOn": "build",
+            "options": {
+                "cwd": "${workspaceFolder}/bin/Debug/netcoreapp2.1"
+            },
+            "command": "host start",
+            "isBackground": true,
+            "problemMatcher": "$func-watch"
         }
     ]
 }

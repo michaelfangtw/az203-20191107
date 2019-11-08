@@ -1,0 +1,5 @@
+{
+    "appService.preDeployTask": "publish-release",
+    "appService.deploySubpath": "",
+    "appService.defaultWebAppToDeploy": "/subscriptions/90be266f-f5e4-434d-b49e-1952a082a7d9/resourceGroups/ManagedPlatform/providers/Microsoft.Web/sites/imgapifij0727"
+}
