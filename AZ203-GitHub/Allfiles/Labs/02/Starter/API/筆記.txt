@@ -1,0 +1,12 @@
+1.н╫зя appsettings.json
+"StorageConnectionString": "DefaultEndpointsProtocol=https;AccountName=imgstorfij0727;AccountKey=4kzb68GfjNm0d8u37dmBhNa5ylFWhnEMe001r6m7vMh+JVmT8uQMT/Zbh0vkjf0oCQuWcyhc28gIvDODdRX8MQ==;EndpointSuffix=core.windows.net",
+
+2.dotnet restore
+  dotnet build
+  dotnet run
+
+Now listening on: http://localhost:52661
+
+
+3.output images file list
+["https://imgstorfij0727.blob.core.windows.net/images/bahnmi.jpg","https://imgstorfij0727.blob.core.windows.net/images/sub.jpg"]

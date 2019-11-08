@@ -1,0 +1,5 @@
+https://dotnet.microsoft.com/download/dotnet-core/2.2
+
+.net core 2.2 installer
+asp.net core 2.2 installer
+.net core sdk 2.2 installer
