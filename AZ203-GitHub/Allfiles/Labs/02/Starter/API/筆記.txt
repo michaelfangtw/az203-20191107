@@ -1,3 +1,5 @@
+0.¦w¸ËAZure CLI
+
 1.­×§ï appsettings.json
 "StorageConnectionString": "DefaultEndpointsProtocol=https;AccountName=imgstorfij0727;AccountKey=4kzb68GfjNm0d8u37dmBhNa5ylFWhnEMe001r6m7vMh+JVmT8uQMT/Zbh0vkjf0oCQuWcyhc28gIvDODdRX8MQ==;EndpointSuffix=core.windows.net",
 
