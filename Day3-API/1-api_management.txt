@@ -1,0 +1,18 @@
+API Management
+apiname: fij0727.azure-api.net
+resource group: demo
+
+1.source api
+https://conferenceapi.azurewebsites.net/?format=json
+https://conferenceapi.azurewebsites.net/conference/speakers
+
+2.api managerment url
+https://fij0727.azure-api.net/conference/speakers
+Ocp-Apim-Subscription-Key: 在subscriptions 內
+Ocp-Apim-Trace: true
+
+
+3.Outbound processing
+可以用outbound policy
+append override delete skip header
+

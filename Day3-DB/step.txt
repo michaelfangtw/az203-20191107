@@ -1,0 +1,38 @@
+1.Azure Cache for Redis
+2.SQL server (logical server)
+3.Azure Cosmo DB\
+API:Core (SQL) 微軟的
+
+4.Storage Account
+Replication: Locally-redundant storage(LRS)
+
+upload file
+file/Generate SAS/Generate SAS token and URL
+
+5.安裝ssms-setup-cht.exe
+
+6.若雲端無法匯入
+  改用SSMS 匯入資料層應用程式
+  AdventureWorks.bacpac 
+  還原AdventureWorks2
+
+
+
+7.
+dotnet new console --name AdventureWorks.Migrate --langVersion 7.1
+
+
+8.
+Migrate
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
+using AdventureWorks.Context;
+using AdventureWorks.Models;
+using Microsoft.Azure.Cosmos;
+using Microsoft.EntityFrameworkCore;
+
+檢查是否轉入
+PolyglotData
+polycosmosfij0727 - Data Explorer

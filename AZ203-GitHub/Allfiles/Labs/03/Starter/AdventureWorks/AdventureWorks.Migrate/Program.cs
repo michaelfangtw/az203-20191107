@@ -1,0 +1,42 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
+using AdventureWorks.Context;
+using AdventureWorks.Models;
+using Microsoft.Azure.Cosmos;
+using Microsoft.EntityFrameworkCore;
+
+namespace AdventureWorks.Migrate
+{
+    class Program
+    {
+        private const string sqlDBConnectionString = "Server=tcp:polysqlsrvrfij0727.database.windows.net,1433;Initial Catalog=AdventureWorks;Persist Security Info=False;User ID=testuser;Password=TestPa$$w0rd;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;";
+        private const string cosmosDBConnectionString = "AccountEndpoint=https://polycosmosfij0727.documents.azure.com:443/;AccountKey=934PCdh9knJAWcp0d61xZXn4Fkwe9bFrwtppLxkGf8XugZ5NCPogMNhJm3BFWw3A57jvBtqHlU1oyZmum0tt5w==;";
+        public static async Task Main(string[] args)
+        {
+            Console.WriteLine("Start Migration!");
+            AdventureWorksSqlContext context = new AdventureWorksSqlContext(sqlDBConnectionString);
+            List<Model> items = await context.Models
+            .Include(m => m.Products)
+            .ToListAsync<Model>();
+
+            await Console.Out.WriteLineAsync($"Total Azure SQL DB Records: {items.Count}");        
+
+            CosmosClient client = new CosmosClient(cosmosDBConnectionString);
+            Database database = await client.CreateDatabaseIfNotExistsAsync("Retail");
+            Container container = await database.CreateContainerIfNotExistsAsync("Online",
+                partitionKeyPath: $"/{nameof(Model.Category)}",
+                throughput: 1000
+            );
+            int count = 0;
+            foreach (var item in items)
+            {
+                ItemResponse<Model> document = await container.UpsertItemAsync<Model>(item);
+                await Console.Out.WriteLineAsync($"Upserted document #{++count:000} [Activity Id: {document.ActivityId}]");
+            }
+            await Console.Out.WriteLineAsync($"Total Azure Cosmos DB Documents: {count}");
+
+        }
+    }
+}
