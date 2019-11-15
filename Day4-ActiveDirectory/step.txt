@@ -1,0 +1,16 @@
+create azure active directory
+search marketplace: Azure Active Directory
+origination: fij0727
+domainname: fij0727ad.onmicrosoft.com
+
+切換目錄:fij0727ad.onmicrosoft.com
+Aazure Active Directory/users/
+admin/角色指派/全域管理者
+user1/ 不特別指定
+
+
+
+login myapps.microsoft.com
+admin@fij0727ad.onmicrosoft.com  pass=Fij0727Azure1234   Kala5267  Fij07271234
+user1@fij0727ad.onmicrosoft.com  pass=Fij0727Azure1234   Nalu8264  Fij07271234
+

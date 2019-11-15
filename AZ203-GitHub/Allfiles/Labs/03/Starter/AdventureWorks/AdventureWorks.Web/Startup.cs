@@ -32,19 +32,22 @@ namespace AdventureWorks.Web
             ConfigureCheckoutService(services);
         }
 
+        //change to cosmo db
         public void ConfigureProductService(IServiceCollection services)
         {
-            services.AddScoped<IAdventureWorksProductContext, AdventureWorksSqlContext>(provider =>
-                new AdventureWorksSqlContext(
-                    _configuration.GetConnectionString(nameof(AdventureWorksSqlContext))
+           services.AddScoped<IAdventureWorksProductContext, AdventureWorksCosmosContext>(provider =>
+                new AdventureWorksCosmosContext(
+                    _configuration.GetConnectionString(nameof(AdventureWorksCosmosContext))
                 )
             );
         }
 
         public void ConfigureCheckoutService(IServiceCollection services)
         {
-            services.AddScoped<IAdventureWorksCheckoutContext>(provider =>
-                new Mock<IAdventureWorksCheckoutContext>().Object
+            services.AddScoped<IAdventureWorksCheckoutContext, AdventureWorksRedisContext>(provider =>
+                new AdventureWorksRedisContext(
+                    _configuration.GetConnectionString(nameof(AdventureWorksRedisContext))
+                )
             );
         }
 

@@ -1,0 +1,110 @@
+1.cosmo db account/keys: connectionstring
+
+
+
+2.keyvalut
+securevalutfij0727
+
+securefuncfij0727/platform feature/identity
+system assigned/Status/On
+
+
+keyvalut
+generate/secrets
+name=storagecredentials
+value=storege 的連線字串
+
+https://securevaultfij0727.vault.azure.net/secrets/storagecredentials/29641b7853c9443893e2c5c4e1d6535d
+
+
+Function APP: securefuncfij0727
+設定以下config
+Application setting  (加密)
+key=DOTNET_SKIP_FIRST_TIME_EXPERIENCE 
+value=truye
+
+key=StorageConnectionString 
+value=@Microsoft.KeyVault(SecretUri=https://securevaultfij0727.vault.azure.net/secrets/storagecredentials/29641b7853c9443893e2c5c4e1d6535d)
+
+
+
+create container: drop (public)
+upload records.json 
+change access level to :private
+
+
+app function 引用元件的方式:建立 function.proj 
+<Project Sdk="Microsoft.NET.Sdk">
+    <PropertyGroup>
+        <TargetFramework>netstandard2.0</TargetFramework>
+    </PropertyGroup>
+    <ItemGroup>
+        <PackageReference Include="Microsoft.Azure.Storage.Blob" Version="11.0.0" />
+    </ItemGroup>
+</Project>
+
+
+run.csx
+
+1.直接輸出
+using System.Net;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.Azure.Storage;
+using Microsoft.Azure.Storage.Blob;
+
+public static async Task<IActionResult> Run(HttpRequest req)
+{
+    string connectionString = Environment.GetEnvironmentVariable("StorageConnectionString");
+    CloudStorageAccount account = CloudStorageAccount.Parse(connectionString);
+    CloudBlobClient blobClient = account.CreateCloudBlobClient();
+    CloudBlobContainer container = blobClient.GetContainerReference("drop");
+    CloudBlockBlob blob = container.GetBlockBlobReference("records.json");
+    string content = await blob.DownloadTextAsync();
+    return new OkObjectResult(content);
+}
+2.產生SAS 兩小時簽章
+Permission: Read
+
+Service Scope: Blob
+
+Resource Types: Object
+
+Expiration Time: 2 Hours
+
+Protocol: HTTPS Only
+
+
+using System.Net;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.Azure.Storage;
+using Microsoft.Azure.Storage.Blob;
+
+public static async Task<IActionResult> Run(HttpRequest req)
+{
+    string connectionString = Environment.GetEnvironmentVariable("StorageConnectionString");
+    CloudStorageAccount account = CloudStorageAccount.Parse(connectionString);
+    CloudBlobClient blobClient = account.CreateCloudBlobClient();
+    CloudBlobContainer container = blobClient.GetContainerReference("drop");
+    CloudBlockBlob blob = container.GetBlockBlobReference("records.json");
+    SharedAccessAccountPolicy policy = new SharedAccessAccountPolicy()
+    {
+        Permissions = SharedAccessAccountPermissions.Read,
+        Services = SharedAccessAccountServices.Blob,
+        ResourceTypes = SharedAccessAccountResourceTypes.Object,
+        SharedAccessExpiryTime = DateTime.UtcNow.AddHours(2),
+        Protocols = SharedAccessProtocol.HttpsOnly
+    };
+    string sasToken = account.GetSharedAccessSignature(policy);
+    string secureBlobUrl = $"{blob.Uri}{sasToken}";
+    return new OkObjectResult(secureBlobUrl);
+}
+
+output:
+https://securestorfij0727.blob.core.windows.net/drop/records.json?sv=2019-02-02&sig=MOYKb%2FPupcd5I8OHilUD5MbZMAOu1QRZovyVGw8PVoo%3D&spr=https&se=2019-11-15T10%3A55%3A22Z&srt=o&ss=b&sp=r
+
+
+
+
+
+
+
