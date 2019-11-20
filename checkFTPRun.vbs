@@ -34,10 +34,10 @@ MyLog ""
 
 dim result
 dim url
-url="http://www.google.com"
+url="https://support.oneskyapp.com/hc/en-us/article_attachments/202761627/example_1.json"
 result=httpGet(url)
 MyLog "httpget,url="  & url
-MyLog result
+MyLog "body=" & result
 
    
 '=====================================================================================================
@@ -46,8 +46,8 @@ public function httpGet(url)
     on error resume next
     dim http
     set http=createObject("Microsoft.XMLHTTP")
-    http.open "GET",url
-    http.send strRequest
+    http.open "GET",url,false
+    http.send
     dim result
 
     If http.Status = 200 Then
@@ -56,7 +56,7 @@ public function httpGet(url)
     if err then    
         MyLog "url=" & url &",error=" & err.description
     end if
-    return result
+    httpGet= result
 end function
 
 Public Function MyLog(Message )
