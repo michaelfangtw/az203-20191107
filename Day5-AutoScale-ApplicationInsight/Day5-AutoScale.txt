@@ -1,4 +1,4 @@
-符合auto scale
+﻿符合auto scale
 1.server less 寫法 將session 放資料庫
 2.可用html5 session storage
 
@@ -8,3 +8,5 @@ auto scale
 設定特定時段/固定節點數
 
 變更APP方案/定價層
+
+

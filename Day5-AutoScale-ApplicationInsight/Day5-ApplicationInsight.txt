@@ -1,0 +1,63 @@
+
+ApplicationInsights
+dotnet add package Microsoft.ApplicationInsights.AspNetCore --version 2.8.2
+
+
+1.做api.zip
+dotnet pulbish
+https://smpapifij0727.azurewebsites.net/WeatherForecast
+2.1 az login
+2.2 部屬
+az webapp deployment source config-zip --resource-group MonitoredAssets --src api.zip --name smpapifij0727
+
+3.1 Application Dashboard
+3.2 Application Map
+可看服務關聯
+
+
+
+4.create console app
+
+private const string _api = "https://smpapifij0727.azurewebsites.net/";
+private static HttpClient _client = new HttpClient(){ BaseAddress = new Uri(_api) };
+
+
+static void Main(string[] args)
+{
+      Run().Wait();
+}
+
+static async Task Run()
+{ 
+    string response = await _client.GetStringAsync("/WeatherForecast");
+    Console.WriteLine(response);    
+}
+
+
+stop api 
+得到 403 錯誤(Site Disabled)
+
+
+4.1 poly handler 套件(retry)
+private static HttpClient _client = new HttpClient(ew PollyHandler()){ BaseAddress = new Uri(_api) };
+
+有錯會有
+Failed Attempt
+Failed Attempt
+[{"date":"2019-11-22T07:23:23.0701163+00:00","temperatureC":26,"temperatureF":78,"summary":"Mild"},{"date":"2019-11-23T07:23:23.0701304+00:00","temperatureC":-1,"temperatureF":31,"summary":"Balmy"},{"date":"2019-11-24T07:23:23.0701319+00:00","temperatureC":48,"temperatureF":118,"summary":"Sweltering"},{"date":"2019-11-25T07:23:23.0701333+00:00","temperatureC":23,"temperatureF":73,"summary":"Hot"},{"date":"2019-11-26T07:23:23.0701346+00:00","temperatureC":40,"temperatureF":103,"summary":"Balmy"}]
+
+關閉api
+Failed Attempt
+Failed Attempt
+Failed Attempt
+Failed Attempt
+
+
+
+
+5.Performance Test
+
+smpapifij0727 - Performance test
+TEST TARGET URL=https://smpapifij0727.azurewebsites.net/WeatherForecast
+
+

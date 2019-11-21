@@ -1,0 +1,19 @@
+1.azure cache  for Redis
+resource group=MonitoredAssets
+name=redisfij0727
+access key=SvhnvhBXCna1X45qmxncIVyqRv5pK0FWi7ABAy6X5I4=
+cloud shell>> az redis show -g MonitoredAssets -n redisfij0727
+
+
+1.1 redis console
+set student fij
+get student
+incr age  #1
+incrby age 10 #110
+get age #110
+del age
+
+
+2.cdn
+subscription /resource provider 註冊 Microsoft.cdn
+才可以使用cdn
