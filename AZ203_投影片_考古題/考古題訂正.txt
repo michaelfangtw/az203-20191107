@@ -1,5 +1,13 @@
 20190712
 考古題訂正:
+1.  
+Orders o
+li
+o.line_items
+o.address.city
+
+3. BC
+
 
 13. FBA
 
@@ -21,13 +29,6 @@ az aks create
 az aks get-credentials
 kubectl apply
 
-1.  
-Orders o
-li
-o.line_items
-o.address.city
-
-3. BC
 
 23. 答案是對的，參考資料如下：
 https://docs.microsoft.com/zh-tw/azure/batch/batch-task-output-files
@@ -72,6 +73,8 @@ https://docs.microsoft.com/zh-tw/azure/app-service/webjobs-create
 40.
 HTTP Request Header 
 Base64
+
+41. 3 -> 2 -> 4 -> 1 or 3 -> 2 -> 1 -> 4
 
 42.
 NotificationHubClient
@@ -121,5 +124,3 @@ ShouldOverwriteCallbackAsync
 71.
 3
 2
-
-41. 3 -> 2 -> 4 -> 1 or 3 -> 2 -> 1 -> 4
