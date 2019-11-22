@@ -29,4 +29,49 @@ key=gXmloeIT+0vsoWgXg6DI+91SVK67XrmNZVNZtYuNBPt+GdqPmszIGNQDlH1NzdbslEPc4pJEcTjX
     select fields 
 3.2 table indexer every 5 mins
 
+3.3 search
+seat
+search=seat
+$filter=price lt 100
+$filter=quantity gt 25&facet=price,values:100|1000|10000
+
+sample
+https://prodsearchfij0727.search.windows.net/indexes/products/docs?api-version=2019-05-06&search=*&%24filter=quantity%20gt%2025&facet=price%2Cvalues%3A100%7C1000%7C10000
+
+3.4 search url
+prodsearchfij0727/overview/url
+https://prodsearchfij0727.search.windows.net
+
+4.1 api management
+web service= https://prodsearchfij0727.search.windows.net/indexes/products/docs
+prefix= search
+api management url=https://prodapifij0727.azure-api.net/search
+
+4.2 all operaions:
+set header
+api-key=EB80EE5F86EA0A0BA7264F6BB26887C5
+
+4.3 list all document (锣传琩高把计)
+   inbound/set querystring
+   <set-query-parameter name="search" exists-action="override">
+            <value>*</value>
+   </set-query-parameter>
+
+4.4 outbound (箇砞odataΑ,锣Θjson)
+  <outbound>
+        <base />
+        <set-body>@{ 
+        var response = context.Response.Body.As<JObject>();
+         return response.Property("value").Value.ToString();
+       }</set-body>
+ </outbound>
+
+
+
+
+
+
+
+
+
 
