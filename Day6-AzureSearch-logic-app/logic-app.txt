@@ -1,0 +1,31 @@
+logic app
+
+1.search connect: http
+When a HTTP request is received
+
+2.
+azure table storage/actions/Insert or Replace Entity Action
+
+connection name=tableconnection
+partition key=manufacturer
+row key=id
+entity=body
+
+3.1 post man
+request POST
+header :application/json
+body={ 
+    "id": "999",
+    "manufacturer": "FUNTECH",
+    "price": 1000.00,
+    "quantity": 10,
+    "name": "Mike"
+}
+
+
+3.2 response
+status=201 created
+response: request body
+
+3.3 search indexer /run ­«·s¯Á¤Þ
+
