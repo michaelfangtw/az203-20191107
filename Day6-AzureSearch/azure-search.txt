@@ -1,9 +1,7 @@
 1.1 Azure cognitive search
 admin key
-EB80EE5F86EA0A0BA7264F6BB26887C5
-
 query key
-EB80EE5F86EA0A0BA7264F6BB26887C5
+
 
 
 1.2
@@ -19,7 +17,7 @@ table service:products
 connect to storage account via name and key
 
 name=prodstoragefij0727
-key=gXmloeIT+0vsoWgXg6DI+91SVK67XrmNZVNZtYuNBPt+GdqPmszIGNQDlH1NzdbslEPc4pJEcTjXlhmNA+iHNQ==
+key=
 
 2.2 import C:\AZ203\AZ203-GitHub\Allfiles\Labs\06\Starter\
     products.csv
@@ -49,7 +47,7 @@ api management url=https://prodapifij0727.azure-api.net/search
 
 4.2 all operaions:
 set header
-api-key=EB80EE5F86EA0A0BA7264F6BB26887C5
+api-key=xxx
 
 4.3 list all document (锣传琩高把计)
    inbound/set querystring
