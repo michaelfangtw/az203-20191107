@@ -1,15 +1,15 @@
 20190712
-考古題訂正:
-1.  
+考古題訂正: 
+1.  (done)
 Orders o
 li
 o.line_items
 o.address.city
 
-3. BC
+3. BC   (done)
 
 
-13. FBA
+13. FBA  (done)
 
 15. A (Documents.Index method)
 https://docs.microsoft.com/en-us/azure/search/search-get-started-dotnet
